@@ -3,6 +3,9 @@ const navbar = document.querySelector ('.navbar')
 
 const display = document.querySelector('.display') 
 
+
+
+
 let apiURL = 'https://fakestoreapi.com/products'
 
 
@@ -71,6 +74,27 @@ function displayCards (data)  {
     document.querySelector('.grid-container').innerHTML = htmlContent;
 }
 
+let cart = [];
+
+function submitToCart ([]) {
+    cart.push(item);
+
+}
+
+document.querySelectorAll('.product-box').forEach((cardElement) => {
+    const button = cardElement.querySelector('.add-to-cart');
+    const title = cardElement.querySelector('h2').innerText;
+    const cost = cardElement.querySelector('.product-price').innerText.slice(1); // removing the $ sign
+
+    button.onclick = function() {
+        const item = {
+            title: title,
+            cost: parseFloat(cost),
+            quantity: 1
+        };
+        submitToCart(item);
+    };
+});
     
 // const productBoxes = document.querySelectorAll ('product-box');
 
@@ -100,30 +124,80 @@ function displayCards (data)  {
 // document.body.appendChild(subHeading);
 
 const fakeStore = async (endpoint) => {
-    let response = await fetch ('https://fakestoreapi.com/products')
+    let response = await fetch ('https://fakestoreapi.com/products' + endpoint)
     let storeItems = await response.json();
     console.log(storeItems)
      displayCards (storeItems)
 }
 
-fakeStore();
+// fakeStore();
 window.onload = function () {
 
-    fakeStore ('products');
+    fakeStore ('/');
 };
 
 
 
-const categories = document.querySelectorAll ('.nav-categories');
+const categoryDisplay = document.querySelector ('.nav-categories');
 
-categories.forEach(category => {
-    category.addEventListener ('click', function (event) {
-        event.preventDefault();
-
-
-
-        let endpoint = event.currentTarget.getAttribute ('data-endpoint');
-        fakeStore(endpoint); })
-    });
+ categoryDisplay.addEventListener('click', function() {
+    fetchProductsByCategory ("electronics");
+ })
 
 
+ function fetchProductsByCategory (category) {
+    const apiURL = `https://fakestoreapi.com/products/category/electronics`
+    fetch(apiURL)
+    .then(response => response.json())
+    .then(data => displayCards(data))
+    .catch(err => console.error(err));
+}
+
+let electronics = document.queryselector('.nav-e-categories')
+
+electronics.addEventListener('click',(e) => {
+fakeStore(`/category/electronics`)
+
+})
+
+// categories.forEach(category => {
+//     category.addEventListener('click', function(event) {
+//         event.preventDefault();
+
+//         let chosenCategory = event.currentTarget.innerText.toLowerCase();
+        
+//         fetch(`https://fakestoreapi.com/products/category/${chosenCategory}`)
+//             .then(response => response.json())
+//             .then(data => displayCards(data))
+//             .catch(err => console.error(err));
+//     });
+// });
+
+
+
+
+
+
+
+// categories.forEach(category => {
+//     category.addEventListener ('click', function (event) {
+//         event.preventDefault();
+
+//         let category = event.currentTarget.innerText.toLowerCase()
+
+// fetch ('https://fakestoreapi.com/products/categories')
+// .then(response => response.json())
+// .then(data => displayCards(data))
+
+// data.forEach(product => {
+//     htmlContent += ''
+
+// })
+
+// .catch(err => console.error(err))
+//         // let endpoint = event.currentTarget.getAttribute ('data-endpoint');
+//         // fakeStore(endpoint); })
+//     });
+
+
+// }) category display did not work. 

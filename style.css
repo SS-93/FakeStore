@@ -19,6 +19,7 @@ body {
      box-sizing: border-box;
      color: wheat;
      border-color: black;
+     box-shadow: inset 4px; 
     
  }
 .grid-container { 
@@ -191,4 +192,12 @@ visibility: visible;
     max-height: 400px;
 
 
+}
+
+.product-image {
+    display: block;
+margin: 0 auto;
+    max-width: 400px;
+    max-height: 400px;
+    
 }
