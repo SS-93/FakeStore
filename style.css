@@ -137,3 +137,58 @@ h2 { color: lightcoral  !important;
 
 }
 
+#accordian {
+
+    margin: 100px auto;
+    width: 600px; 
+}
+
+#accordian li {
+list-style: none;
+width: 100%;
+margin-bottom: 10px;
+background: #fff;
+padding: 10px;
+border-radius: 4px;
+
+}
+
+
+#accordian li label {
+
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    color: lightcoral;
+}
+
+#accordian li label span {
+
+    transform: rotate(90deg);
+    font-size: 22px;
+    color: navy;
+}
+
+#accordian label + input [type = "radio"]{
+    display: null ;
+}
+
+#accordian .content {
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+
+
+}
+#accordian label + input [type = "radio"] :checked + .content {
+visibility: visible;
+    max-height: 400px;
+
+
+}
