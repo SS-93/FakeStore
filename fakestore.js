@@ -128,6 +128,7 @@ const fakeStore = async (endpoint) => {
     let storeItems = await response.json();
     console.log(storeItems)
      displayCards (storeItems)
+
 }
 
 // fakeStore();
@@ -138,26 +139,49 @@ window.onload = function () {
 
 
 
-const categoryDisplay = document.querySelector ('.nav-categories');
+// const categoryDisplay = document.querySelector ('.nav-categories');
 
- categoryDisplay.addEventListener('click', function() {
-    fetchProductsByCategory ("electronics");
- })
+//  categoryDisplay.addEventListener('click', function() {
+//     fetchProductsByCategory ("electronics");
+//  })
 
 
  function fetchProductsByCategory (category) {
-    const apiURL = `https://fakestoreapi.com/products/category/electronics`
+    const apiURL = `https://fakestoreapi.com/products/category/`
     fetch(apiURL)
     .then(response => response.json())
     .then(data => displayCards(data))
     .catch(err => console.error(err));
 }
 
-let electronics = document.queryselector('.nav-e-categories')
+let electronics = document.getElementById(`electronics`)
 
 electronics.addEventListener('click',(e) => {
 fakeStore(`/category/electronics`)
 
+})
+
+let jewelery = document.getElementById('jewelry')
+
+jewelery.addEventListener('click', (e) =>{
+    fakeStore(`/category/jewelery`)
+})
+
+let mensClothing = document.getElementById('mens-clothing')
+
+mensClothing.addEventListener('click', (e) =>{
+    fakeStore(`/category/men's clothing`)
+})
+
+let womensClothing = document.getElementById('womens-clothing')
+
+womensClothing.addEventListener('click', (e) =>{
+    fakeStore(`/category/women's clothing`)
+})
+
+const addToCart = document.querySelectorAll ('cart')
+addToCart.addEventListener('click', (e)=>{
+    submitToCart ()
 })
 
 // categories.forEach(category => {
